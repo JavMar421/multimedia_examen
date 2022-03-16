@@ -22,7 +22,7 @@ class ActivityMainViewModel : ViewModel() {
     val responseList: LiveData<List<Result>>
         get() = _responseList
 
-
+    //rueda
     suspend fun setIsVisibleInMainThread(value: Boolean) = withContext(Dispatchers.Main) {
         _isVisible.value = value
     }
@@ -30,16 +30,17 @@ class ActivityMainViewModel : ViewModel() {
     suspend fun setResponseTextInMainThread(value: String) = withContext(Dispatchers.Main) {
         _responseText.value = value
     }
-
+    //coge los datos y los iguala
     suspend fun setResponseListInMainThread(value: List<Result>) = withContext(Dispatchers.Main) {
         _responseList.value = value
     }
 
-
+    //obtienes los datos y poder guardarlos
     fun descargarPersonas(url: String) {
         viewModelScope.launch {
 
             withContext(Dispatchers.IO) {
+                //rueda de carga mostrar
                 setIsVisibleInMainThread(true)
 
                 val client = OkHttpClient()
@@ -63,6 +64,7 @@ class ActivityMainViewModel : ViewModel() {
                     override fun onResponse(call: Call, response: Response) {
                         println(response.toString())
                         response.body?.let { responseBody ->
+
                             val body = responseBody.string()
                             println(body)
                             val gson = Gson()
@@ -77,7 +79,7 @@ class ActivityMainViewModel : ViewModel() {
                                 setIsVisibleInMainThread(false)
 
                                 setResponseListInMainThread(personas.results)
-
+                                //toast
                                 setResponseTextInMainThread("Hemos obtenido ${personas.results.count()} ")
                             }
                         }

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.examen.pmdm.databinding.RecyclerviewBinding
 
-
+//pasar los datos
 class RecyclerAdapter(var personas: MutableList<Result>) :
     RecyclerView.Adapter<RecyclerAdapter.TextoViewHolder>() {
 
@@ -23,7 +23,7 @@ class RecyclerAdapter(var personas: MutableList<Result>) :
     }
 
     override fun onBindViewHolder(holder: TextoViewHolder, pos: Int) {
-
+            //mostrar nombre en el boton
             holder.itemBinding.name.text = personas[pos].name
             holder.itemBinding.all.setOnClickListener {
             val intent = Intent(holder.itemBinding.root.context, PeliculasActivity::class.java)
